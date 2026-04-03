@@ -73,3 +73,5 @@ window.removeFromCart = (id) => {
     cart = cart.filter(i => i.id !== id);
     updateCart();
 };
+displayGames(games);
+updateCart(); 
