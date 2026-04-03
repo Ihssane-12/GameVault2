@@ -26,13 +26,15 @@ function displayGames(filteredGames) {
                     ${game.genre}
                 </span>
             </div>
-            <div class="p-5 flex-grow flex flex-col justify-between">
-                <h3 class="text-xl font-bold mb-4 text-light">${game.title}</h3>
+            <div class="p-5 flex-grow flex  items-center justify-between">
+                <h3 class="text-xl font-bold mb-4 text-light self-center">${game.title}</h3>
                 <div class="flex justify-between items-center">
-                    <span class="text-2xl font-black text-secondary">${game.price} €</span>
-                    <button onclick="addToCart(${game.id})" class="bg-secondary text-primary px-4 py-2 rounded-lg font-bold">
-                        + AJOUTER
-                    </button>
+   <button onclick="addToCart(${game.id})"
+    class="flex items-center gap-2  text-primary px-4 py-2 rounded-lg font-bold hover:bg-accent transition">
+
+    <i class="fas fa-cart-plus text-secondary"></i>
+    
+</button>
                 </div>
             </div>
         </div>
@@ -73,7 +75,7 @@ function updateCart() {
 }
 
 function renderCart() {
-    cartItemsContainer.innerHTML = cart.length === 0 
+    cartItemsContainer.innerHTML = cart.length === 0
         ? `<p class="text-center py-10">Votre panier est vide...</p>`
         : cart.map(item => `
         <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
