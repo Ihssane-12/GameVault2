@@ -61,3 +61,11 @@ window.addToCart = (id) => {
 
     updateCart();
 };
+window.changeQty = (id, delta) => {
+    const item = cart.find(i => i.id === id);
+    item.quantity += delta;
+
+    if (item.quantity < 1) return removeFromCart(id);
+
+    updateCart();
+};
