@@ -1,122 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-      <script> tailwind.config = { theme: { extend: { colors: { primary: '#021A54', /* Dark Blue */ secondary: '#FF85BB', /* Pink */ accent: '#FFCEE3', /* Soft Pink */ light: '#F5F5F5', /* White/Off-white */ } } } } </script>
-<style>
-  .game-card {
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 133, 187, 0.2);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameVault | Boutique de Jeux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { theme: { extend: { colors: { primary: '#021A54', /* Dark Blue */ secondary: '#FF85BB', /* Pink */ accent: '#FFCEE3', /* Soft Pink */ light: '#F5F5F5', /* White/Off-white */ } } } } </script>
+  <style>
+    .game-card {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 133, 187, 0.2);
+    }
 
-  .game-card:hover {
-    transform: translateY(-8px);
-    border-color: #FF85BB;
-    box-shadow: 0 10px 20px -10px rgba(255, 133, 187, 0.5);
-  }
-</style>
-
+    .game-card:hover {
+      transform: translateY(-8px);
+      border-color: #FF85BB;
+      box-shadow: 0 10px 20px -10px rgba(255, 133, 187, 0.5);
+    }
+  </style>
 </head>
 
-</head>
-<body>
-    <body class="bg-primary text-light min-h-screen font-sans">
-
+<body class="bg-primary text-light min-h-screen font-sans">
   <header class="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-secondary/30 p-4">
     <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-
-      <!-- Logo -->
-      <h1 class="text-3xl font-black text-secondary tracking-tighter">
-        GAMEVAULT
-      </h1>
-
-      <!-- Search + Cart -->
-      <div class="flex items-center gap-4 w-full md:w-1/2">
-
-        <!-- Search -->
-        <input
-          type="text"
-          id="searchInput"
+      <h1 class="text-3xl font-black text-secondary tracking-tighter">GAMEVAULT</h1>
+      <div class="flex items-center gap-4 w-full md:w-1/2"> <input type="text" id="searchInput"
           placeholder="Chercher un titre..."
-          class="w-full p-2 rounded-lg bg-white/5 border border-secondary/30 text-light focus:outline-none focus:ring-2 focus:ring-secondary"
-        >
-
-        <!-- Cart -->
-        <button id="cartBtn" class="relative p-2 bg-secondary rounded-xl hover:bg-accent transition-colors group">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          class="w-full p-2 rounded-lg bg-white/5 border border-secondary/30 text-light focus:outline-none focus:ring-2 focus:ring-secondary">
+        <button id="cartBtn" class="relative p-2 bg-secondary rounded-xl hover:bg-accent transition-colors group"> <svg
+            xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-
-          <span id="cartCount"
-            class="absolute -top-2 -right-2 bg-light text-primary text-xs font-black px-2 py-0.5 rounded-full border-2 border-secondary">
-            0
-          </span>
-        </button>
-
-      </div>
+          </svg> <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-light text-primary text-xs font-black px-2 py-0.5 rounded-full border-2 border-secondary">0</span>
+        </button> </div>   
     </div>
   </header>
   <main class="container mx-auto p-6">
-
-  <div class="flex flex-wrap gap-3 mb-10 justify-center">
-
-    <button class="filter-btn px-6 py-2 rounded-lg border-2 border-secondary text-secondary font-bold hover:bg-secondary hover:text-primary transition" data-category="all">
-      TOUS
-    </button>
-
-    <button class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition" data-category="Action">
-      ACTION
-    </button>
-
-    <button class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition" data-category="RPG">
-      RPG
-    </button>
-
-    <button class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition" data-category="FPS">
-      FPS
-    </button>
-
-  </div>
- <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-4 gap-8"></div>
+    <div class="flex flex-wrap gap-3 mb-10 justify-center"> <button
+        class="filter-btn px-6 py-2 rounded-lg border-2 border-secondary text-secondary font-bold hover:bg-secondary hover:text-primary transition"
+        data-category="all">TOUS</button> <button
+        class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition"
+        data-category="Action">ACTION</button> <button
+        class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition"
+        data-category="RPG">RPG</button> <button
+        class="filter-btn px-6 py-2 rounded-lg border-2 border-white/10 text-light/60 font-bold hover:border-secondary hover:text-secondary transition"
+        data-category="FPS">FPS</button> </div>
+    <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-4 gap-8"> </div>
     <section id="cartSection" class="hidden fixed inset-0 bg-primary/98 z-[100] p-6 backdrop-blur-xl">
-
-  <div class="container mx-auto max-w-2xl bg-primary border border-secondary/20 rounded-3xl shadow-2xl p-8 mt-10">
-
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8 pb-4 border-b border-secondary/20">
-      <h2 class="text-3xl font-black text-secondary uppercase">Mon Panier</h2>
-      <button id="closeCart" class="text-accent hover:text-secondary text-2xl transition">
-        Fermer ✕
-      </button>
-    </div>
-
-    <!-- Items -->
-    <div id="cartItems" class="space-y-4 mb-8 max-h-[50vh] overflow-y-auto pr-2"></div>
-
-    <!-- Total -->
-    <div class="pt-6 border-t border-secondary/20">
-      <div class="flex justify-between text-2xl font-black mb-6">
-        <span class="text-accent">TOTAL</span>
-        <span id="cartTotal" class="text-secondary">0.00 €</span>
+      <div class="container mx-auto max-w-2xl bg-primary border border-secondary/20 rounded-3xl shadow-2xl p-8 mt-10">
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-secondary/20">
+          <h2 class="text-3xl font-black text-secondary uppercase">Mon Panier</h2> <button id="closeCart"
+            class="text-accent hover:text-secondary text-2xl transition">Fermer ✕</button>
+        </div>
+        <div id="cartItems" class="space-y-4 mb-8 max-h-[50vh] overflow-y-auto pr-2"> </div>
+        <div class="pt-6 border-t border-secondary/20">
+          <div class="flex justify-between text-2xl font-black mb-6"> <span class="text-accent">TOTAL</span> <span
+              id="cartTotal" class="text-secondary">0.00 €</span> </div> <button id="checkoutBtn"
+            class="w-full bg-secondary text-primary font-black py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition shadow-lg shadow-secondary/20 uppercase tracking-widest">
+            Commander Maintenant </button>
+        </div>
       </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>   
 
-      <button id="checkoutBtn"
-        class="w-full bg-secondary text-primary font-black py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition shadow-lg shadow-secondary/20 uppercase tracking-widest">
-        Commander Maintenant
-      </button>
-    </div>
-
-  </div>
-</section>
-</main>
-
-<script src="script.js"></script>
-
-</body>
-</html>
-</body>
 </html>
