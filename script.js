@@ -6,3 +6,12 @@ const games = [
     { id: 5, title: "Doom Eternal", price: 29.99, genre: "FPS", image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg?t=1755109910" },
     { id: 6, title: "Spider-Man 2", price: 79.99, genre: "Action", image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/ss_1950c472438a5ccde0f9e7c112dceaddd7cd52f1.1920x1080.jpg?t=1763569499" },
 ];
+let cart = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
+
+const gamesGrid = document.getElementById('gamesGrid');
+const searchInput = document.getElementById('searchInput');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cartSection = document.getElementById('cartSection');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartCount = document.getElementById('cartCount');
+const cartTotal = document.getElementById('cartTotal');
