@@ -6,6 +6,7 @@ const games = [
     { id: 5, title: "Doom Eternal", price: 29.99, genre: "FPS", image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg?t=1755109910" },
     { id: 6, title: "Spider-Man 2", price: 79.99, genre: "Action", image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/ss_1950c472438a5ccde0f9e7c112dceaddd7cd52f1.1920x1080.jpg?t=1763569499" },
 ];
+
 let cart = JSON.parse(localStorage.getItem('gamevault_cart')) || [];
 
 const gamesGrid = document.getElementById('gamesGrid');
@@ -15,6 +16,7 @@ const cartSection = document.getElementById('cartSection');
 const cartItemsContainer = document.getElementById('cartItems');
 const cartCount = document.getElementById('cartCount');
 const cartTotal = document.getElementById('cartTotal');
+
 function displayGames(filteredGames) {
     gamesGrid.innerHTML = filteredGames.map(game => `
         <div class="game-card bg-white/5 rounded-2xl overflow-hidden flex flex-col">
@@ -36,6 +38,7 @@ function displayGames(filteredGames) {
         </div>
     `).join('');
 }
+
 function handleFilters() {
     const searchTerm = searchInput.value.toLowerCase();
     const activeBtn = document.querySelector('.filter-btn.bg-secondary');
@@ -49,6 +52,7 @@ function handleFilters() {
 
     displayGames(filtered);
 }
+
 window.addToCart = (id) => {
     const game = games.find(g => g.id === id);
     const itemInCart = cart.find(item => item.id === id);
@@ -61,6 +65,36 @@ window.addToCart = (id) => {
 
     updateCart();
 };
+
+function updateCart() {
+    localStorage.setItem('gamevault_cart', JSON.stringify(cart));
+    cartCount.innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
+    renderCart();
+}
+
+function renderCart() {
+    cartItemsContainer.innerHTML = cart.length === 0 
+        ? `<p class="text-center py-10">Votre panier est vide...</p>`
+        : cart.map(item => `
+        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+            <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl">
+            <div class="flex-grow">
+                <h4 class="font-bold">${item.title}</h4>
+                <p>${item.price} €</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="changeQty(${item.id}, -1)">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+            <button onclick="removeFromCart(${item.id})">X</button>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    cartTotal.innerText = `${total.toFixed(2)} €`;
+}
+
 window.changeQty = (id, delta) => {
     const item = cart.find(i => i.id === id);
     item.quantity += delta;
@@ -69,9 +103,33 @@ window.changeQty = (id, delta) => {
 
     updateCart();
 };
+
 window.removeFromCart = (id) => {
     cart = cart.filter(i => i.id !== id);
     updateCart();
 };
+
+searchInput.addEventListener('input', handleFilters);
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('bg-secondary'));
+        btn.classList.add('bg-secondary');
+        handleFilters();
+    });
+});
+
+document.getElementById('cartBtn').addEventListener('click', () => cartSection.classList.remove('hidden'));
+document.getElementById('closeCart').addEventListener('click', () => cartSection.classList.add('hidden'));
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (cart.length === 0) return;
+    alert("Commande confirmée !");
+    cart = [];
+    updateCart();
+    cartSection.classList.add('hidden');
+});
+
+// Init
 displayGames(games);
-updateCart(); 
+updateCart();
