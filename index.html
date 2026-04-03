@@ -6,7 +6,20 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
       <script> tailwind.config = { theme: { extend: { colors: { primary: '#021A54', /* Dark Blue */ secondary: '#FF85BB', /* Pink */ accent: '#FFCEE3', /* Soft Pink */ light: '#F5F5F5', /* White/Off-white */ } } } } </script>
+<style>
+  .game-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 133, 187, 0.2);
+  }
 
+  .game-card:hover {
+    transform: translateY(-8px);
+    border-color: #FF85BB;
+    box-shadow: 0 10px 20px -10px rgba(255, 133, 187, 0.5);
+  }
+</style>
+
+</head>
 
 </head>
 <body>
