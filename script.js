@@ -26,13 +26,13 @@ function displayGames(filteredGames) {
                     ${game.genre}
                 </span>
             </div>
-            <div class="p-5 flex-grow flex flex-col justify-between">
-                <h3 class="text-xl font-bold mb-4 text-light">${game.title}</h3>
+            <div class="p-5 flex-grow flex  items-center justify-between">
+                <h3 class="text-xl font-bold mb-4 text-light self-center">${game.title}</h3>
                 <div class="flex justify-between items-center">
-                   <button onclick="addToCart(${game.id})"
-    class="flex items-center gap-2 bg-secondary text-primary px-4 py-2 rounded-lg font-bold hover:bg-accent transition">
+   <button onclick="addToCart(${game.id})"
+    class="flex items-center gap-2  text-primary px-4 py-2 rounded-lg font-bold hover:bg-accent transition">
 
-    <i class="fas fa-shopping-cart"></i>
+    <i class="fas fa-cart-plus text-secondary"></i>
     
 </button>
                 </div>
