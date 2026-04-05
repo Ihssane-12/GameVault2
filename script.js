@@ -82,26 +82,45 @@ function updateCart() {
 }
 
 function renderCart() {
-    cartItemsContainer.innerHTML = cart.length === 0
-        ? `<p class="text-center py-10">Votre panier est vide...</p>`
-        : cart.map(item => `
-        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
-            <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl">
-            <div class="flex-grow">
-                <h4 class="font-bold">${item.title}</h4>
-                <p>${item.price} €</p>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="changeQty(${item.id}, -1)">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="changeQty(${item.id}, 1)">+</button>
-            </div>
-            <button onclick="removeFromCart(${item.id})">X</button>
-        </div>
-    `).join('');
+    let html = "";
 
-    const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    cartTotal.innerText = `${total.toFixed(2)} €`;
+    if (cart.length === 0) {
+        html = `<p class="text-center text-accent/50 py-10">Votre panier est vide...</p>`;
+    } else {
+
+        for (let i = 0; i < cart.length; i++) {
+            let item = cart[i];
+
+            html += `
+            <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl">
+                <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl">
+                <div class="flex-grow">
+                    <h4 class="font-bold">${item.title}</h4>
+                    <p class="text-secondary font-bold">${item.price} €</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="changeQty(${item.id}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQty(${item.id}, 1)">+</button>
+                </div>
+
+                <button onclick="removeFromCart(${item.id})">X</button>
+            </div>
+            `;
+        }
+    }
+
+    cartItemsContainer.innerHTML = html;
+
+    // TOTAL
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        total += cart[i].price * cart[i].quantity;
+    }
+
+    cartTotal.innerText = total.toFixed(2) + " €";
 }
 
 window.changeQty = (id, delta) => {
