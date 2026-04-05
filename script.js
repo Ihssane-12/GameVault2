@@ -40,17 +40,24 @@ function displayGames(filteredGames) {
         </div>
     `).join('');
 }
-
 function handleFilters() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const activeBtn = document.querySelector('.filter-btn.bg-secondary');
-    const activeCategory = activeBtn ? activeBtn.dataset.category : 'all';
+    let searchTerm = searchInput.value.toLowerCase();
 
-    const filtered = games.filter(game => {
-        const matchesSearch = game.title.toLowerCase().includes(searchTerm);
-        const matchesCategory = activeCategory === 'all' || game.genre === activeCategory;
-        return matchesSearch && matchesCategory;
-    });
+    let activeBtn = document.querySelector('.filter-btn.bg-secondary');
+    let activeCategory = activeBtn ? activeBtn.dataset.category : "all";
+
+    let filtered = [];
+
+    for (let i = 0; i < games.length; i++) {
+        let game = games[i];
+
+        let matchSearch = game.title.toLowerCase().includes(searchTerm);
+        let matchCategory = (activeCategory === "all" || game.genre === activeCategory);
+
+        if (matchSearch && matchCategory) {
+            filtered.push(game);
+        }
+    }
 
     displayGames(filtered);
 }
