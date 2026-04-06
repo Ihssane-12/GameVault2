@@ -28,6 +28,7 @@ function displayGames(filteredGames) {
             </div>
             <div class="p-5 flex-grow flex  items-center justify-between">
                 <h3 class="text-xl font-bold mb-4 text-light self-center">${game.title}</h3>
+                <h3 class="text-xl font-bold text-secondary self-center">${game.price}</h3>
                 <div class="flex justify-between items-center">
    <button onclick="addToCart(${game.id})"
     class="flex items-center gap-2  text-primary px-4 py-2 rounded-lg font-bold hover:bg-accent transition">
@@ -62,7 +63,7 @@ function handleFilters() {
     displayGames(filtered);
 }
 
-window.addToCart = (id) => {
+const addToCart = (id) => {
     const game = games.find(g => g.id === id);
     const itemInCart = cart.find(item => item.id === id);
 
@@ -123,7 +124,7 @@ function renderCart() {
     cartTotal.innerText = total.toFixed(2) + " €";
 }
 
-window.changeQty = (id, delta) => {
+const changeQty = (id, delta) => {
     const item = cart.find(i => i.id === id);
     item.quantity += delta;
 
@@ -132,7 +133,7 @@ window.changeQty = (id, delta) => {
     updateCart();
 };
 
-window.removeFromCart = (id) => {
+const removeFromCart = (id) => {
     cart = cart.filter(i => i.id !== id);
     updateCart();
 };
